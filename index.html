@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        
+    </body>
+    <script src="https://www.gstatic.com/firebasejs/4.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.1/firebase-database.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBIV6MXLAj2j23hTgK680KN9qWBIKd0yPw",
+            authDomain: "fir-database-example-kr.firebaseapp.com",
+            databaseURL: "https://fir-database-example-kr.firebaseio.com",
+            projectId: "fir-database-example-kr",
+            storageBucket: "fir-database-example-kr.appspot.com",
+            messagingSenderId: "686821990585"
+        };
+        firebase.initializeApp(config);
+
+        var rootRef = firebase.database().ref();
+
+        //1번 uid 비교
+        rootRef.child('users').child('1').once('value', function(data){
+            console.log('1번 :' , data.val());
+        });
+
+        //2번 이메일 찾기
+        rootRef.child('users').orderByChild('name').equalTo('Backho Kang').once('value', function(data){
+            console.log('2번 :' , data.val());
+        });
+
+        //3번 3개만 가져오기
+        rootRef.child('users').limitToFirst(3).once('value', function(data){
+            console.log('3번 :' , data.val());
+        });
+
+        //4번 이메일 S로 시작하는 유저 가져오기
+        rootRef.child('users').orderByChild('email').startAt('S').endAt('S\uf8ff').once('value', function(data){
+            console.log('4번 :' , data.val());
+        });
+
+
+    </script>
+</html>
