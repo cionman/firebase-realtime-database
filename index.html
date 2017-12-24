@@ -43,6 +43,30 @@
             console.log('4번 :' , data.val());
         });
 
+        //5번 나이 30미만
+        rootRef.child('users').orderByChild('age').endAt(29).once('value', function(data){
+            console.log('5번 :' , data.val());
+        });
+
+        //6번 나이 30이상
+        rootRef.child('users').orderByChild('age').startAt(30).once('value', function(data){
+            console.log('6번 :' , data.val());
+        });
+
+        //7번 나이 19이상 30이하
+        rootRef.child('users').orderByChild('age').startAt(19).endAt(30).once('value', function(data){
+            console.log('7번 :' , data.val());
+        });
+
+        //8번 나이 19세 도시는 대전
+        rootRef.child('users').orderByChild('age_city').equalTo('19_Daejun').once('value', function(data){
+            console.log('8번 :' , data.val());
+        });
+
+
+
+
+
 
     </script>
 </html>
